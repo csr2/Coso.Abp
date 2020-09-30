@@ -1,0 +1,87 @@
+﻿@using Localization.Resources.AbpUi
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.MultiTenancy
+@using Volo.Abp.UI.Navigation
+@using Volo.Abp.Users
+@using Coso.Abp.Theme.AdminLTE.Localization
+@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
+@inject IHtmlLocalizer<AdminLTEResource> AL
+@model ApplicationMenu
+
+
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+    <img src="~/themes/adminlte/img/user2.png" class="user-image img-circle elevation-2" alt="User Image">
+    <span class="d-none d-md-inline">
+        @if (CurrentUser.TenantId != null)
+        {
+<small><i>@CurrentTenant.Name</i>\</small>@CurrentUser.UserName }
+else
+{
+@CurrentUser.UserName}
+    </span>
+</a>
+<div class="dropdown-menu dropdown-menu-right">
+    <div class="p-2 row">
+        <div class="pr-0 col col-auto">
+            <img src="~/themes/adminlte/img/user2.png" class="user-avatar-big" alt="User Image">
+        </div>
+        <div class="pl-2 col">
+            <span>@AL["Welcome"]</span><br>
+
+            @if (CurrentUser.TenantId != null)
+            {
+<strong>
+    <small><i>@CurrentTenant.Name</i>\</small>@CurrentUser.UserName
+</strong> }
+else
+{
+<strong>  @CurrentUser.UserName     </strong>}
+        </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    @foreach (var menuItem in Model.Items)
+    {
+        var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"{menuItem.ElementId}\"";
+        var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.Content(menuItem.Url);
+<a class="dropdown-item pointer" href="@url" @Html.Raw(elementId)> @menuItem.DisplayName</a>
+            }
+
+    @*<a class="dropdown-item pointer" href="/account/manage-profile">Manage your profile</a>
+        <a class="dropdown-item pointer" href="/account/security-logs">My security logs</a>
+        <a id="logout" class="dropdown-item pointer">Log out</a>*@
+</div>
+
+@*<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <li class="user-header bg-primary">
+            <img src="~/themes/adminlte/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <p>
+                @AL["Welcome"],
+                @if (CurrentUser.TenantId != null)
+                {
+    <small><i>@CurrentTenant.Name</i>\</small>@CurrentUser.UserName }
+    else
+    {
+    @CurrentUser.UserName            }
+            </p>
+        </li>
+        <li class="user-body">
+            <div class="row">
+                <a href="#">@AL["ChangeProfilePicture"].Value</a>
+
+            </div>
+        </li>
+        <li class="user-footer">
+            @foreach (var menuItem in Model.Items)
+            {
+
+                var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"{menuItem.ElementId}\"";
+                // var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
+                var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
+                var cssClass = menuItem.Name == "Account.Logout" ? " float-right" : "";
+                var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.Content(menuItem.Url);
+    <a class="btn btn-default btn-flat @cssClass @disabled" href="@url" @Html.Raw(elementId)>
+        @menuItem.DisplayName
+    </a>}
+        </li>
+    </ul>*@

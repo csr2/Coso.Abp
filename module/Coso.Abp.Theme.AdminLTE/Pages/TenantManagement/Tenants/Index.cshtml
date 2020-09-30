@@ -1,0 +1,51 @@
+﻿@page
+@using Coso.Abp.Theme.AdminLTE.Localization
+@using Volo.Abp.UI.Navigation.Localization.Resource;
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.TenantManagement
+@using Volo.Abp.TenantManagement.Localization
+@using Volo.Abp.TenantManagement.Web.Navigation
+@using Volo.Abp.TenantManagement.Web.Pages.TenantManagement.Tenants
+@model Coso.Abp.Theme.AdminLTE.Pages.TenantManagement.Tenants.IndexModel
+@inject IHtmlLocalizer<AdminLTEResource> TL
+@inject IHtmlLocalizer<AbpTenantManagementResource> L
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Tenants"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:TenantManagement"].Value);
+    PageLayout.Content.MenuItemName = TenantManagementMenuNames.Tenants;
+}
+@section styles {
+
+}
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/Pages/FeatureManagement/feature-management-modal.js" />
+        <abp-script src="/Pages/TenantManagement/Tenants/ConnectionStringsModal.js" />
+        <abp-script src="/Pages/TenantManagement/Tenants/Index.js" />
+    </abp-script-bundle>
+}
+@section button{
+    @if (await Authorization.IsGrantedAsync(TenantManagementPermissions.Tenants.Create))
+    {
+        <abp-button button-type="Primary" name="CreateTenant" id="CreateTenant" icon="plus" text="@L["NewTenant"].Value" class="btn-sm" />
+    }
+}
+
+
+<abp-card>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="TenantsTable">
+            <thead Theme="Light">
+                <tr>
+                    <th>@L["Actions"]</th>
+                    <th>@L["TenantName"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>
+

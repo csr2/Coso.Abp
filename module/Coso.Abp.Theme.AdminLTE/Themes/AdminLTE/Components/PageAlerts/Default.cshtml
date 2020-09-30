@@ -1,0 +1,41 @@
+﻿@model Volo.Abp.AspNetCore.Mvc.UI.Alerts.AlertList
+@if (Model.Any())
+{
+    <div id="AbpPageAlerts">
+        @foreach (var alertMessage in Model)
+        {
+
+            <abp-alert alert-type="@alertMessage.Type" dismissible="@alertMessage.Dismissible">
+                @if (alertMessage.Title != null)
+                {
+                    <h4>@alertMessage.Title</h4>
+                }
+                @alertMessage.Text
+            </abp-alert>
+            <abp-toast-container></abp-toast-container>
+
+        }
+    </div>
+}
+@*<div id="toast-container" class="toast-bottom-right" aria-live="polite" role="alert">
+    <div class="toast toast-error" style="">
+    <div class="toast-title">2342</div>
+        <div class="toast-message">234234</div>
+    </div>
+</div>*@
+
+@*<div class="toast-container ">
+    <div class="toast toast-error">
+        <div class="toast-icon">
+            <i class="fa icon fa-times-circle"></i>
+        </div>
+        <div class="toast-content">
+            <button class="toast-close-button"><i class="fa fa-times"></i></button>
+
+            <div class="toast-title"> Error </div>
+            <p class="toast-message">
+                Invalid username or password!
+            </p>
+        </div>
+    </div>
+</div>*@

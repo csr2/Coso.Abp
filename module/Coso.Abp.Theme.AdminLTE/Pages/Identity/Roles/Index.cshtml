@@ -1,0 +1,52 @@
+﻿@page
+@using Coso.Abp.Theme.AdminLTE.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.UI.Navigation.Localization.Resource;
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.Identity
+@using Volo.Abp.Identity.Localization
+@using Volo.Abp.Identity.Web.Navigation
+@using Volo.Abp.Identity.Web.Pages.Identity.Roles
+@model Coso.Abp.Theme.AdminLTE.Pages.Identity.Roles.IndexModel
+@inject IHtmlLocalizer<AdminLTEResource> TL
+@inject IHtmlLocalizer<IdentityResource> L
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@inject IThemeManager ThemeManager
+@{
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
+    PageLayout.Content.Title = L["Roles"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:IdentityManagement"].Value);
+    PageLayout.Content.MenuItemName = IdentityMenuNames.Roles;
+}
+@section styles {
+    <abp-style-bundle name="@typeof(IndexModel).FullName">
+        <abp-style src="/Pages/AbpPermissionManagement/permission-management-modal.css" />
+    </abp-style-bundle>
+}
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/Pages/AbpPermissionManagement/permission-management-modal.js" />
+        <abp-script src="/Pages/identity/roles/index.js" />
+    </abp-script-bundle>
+}
+@section button{
+    @if (await Authorization.IsGrantedAsync(IdentityPermissions.Roles.Create))
+    {
+        <abp-button button-type="Primary" name="CreateRole" id="CreateRole" text="@L["NewRole"].Value" icon="plus" />
+    }
+}
+<abp-card>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="IdentityRolesTable">
+            <thead Theme="Light">
+                <tr>
+                    <th>@L["Actions"]</th>
+                    <th>@L["RoleName"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>

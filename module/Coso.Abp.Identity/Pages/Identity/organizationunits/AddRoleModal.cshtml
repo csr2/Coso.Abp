@@ -1,0 +1,95 @@
+﻿@page
+@inherits Coso.Abp.Identity.Pages.Identity.CosoIdentityPage
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Coso.Abp.Identity.Pages.Identity.organizationunits.AddRoleModal
+@{
+    Layout = null;
+}
+
+
+<script>
+    $(function () {
+        var l = abp.localization.getResource('CosoAbpIdentity');
+        var _identityRoleAppService = volo.abp.identity.identityRole;
+        var _organizationUnitService = coso.abp.identity.application.organizationUnit;
+        var dataTable = $('#identityRoleTable').DataTable(abp.libs.datatables.normalizeConfiguration({
+            processing: true,
+            serverSide: true,
+            paging: true,
+            searching: false,
+            autoWidth: false,
+            info: false,
+            lengthChange: false,
+            scrollCollapse: true,
+            //iDisplayLength: 25,
+            ordering: [[1, "asc"]],
+            ajax: abp.libs.datatables.createAjax(_identityRoleAppService.getList),
+            columnDefs: [
+                {
+                    targets: 0,
+                    data: null,
+                    defaultContent: '',
+                    width: "1%",
+                    render: function (data, type, row) { // 返回自定义内容
+                        return `<input type="checkbox" value="${row.id}">`;
+                    },
+                },
+                { data: "name" },
+            ],
+            select: {
+                style: 'multi',
+                selector: 'td:first-child input[type="checkbox"]'
+            }
+        }));
+        $('#btnAddRoles').click(function (e) {
+            e.preventDefault();
+            var array = new Array();
+            array = dataTable.rows({ selected: true }).data().toArray();
+            if (array.length == 0) {//如果一个没有勾选
+                abp.message.warn(l('PleaseSelect') + '角色！');
+            } else {
+                var roleIds = [];
+                for (var i = 0; i < array.length; i++) {
+                    if (array[0].id != "") {
+                        roleIds.push(array[i].id);
+                    }
+                }
+                var OuId = $("#OuId").val();
+                _organizationUnitService.addRoleToOrganizationUnit({
+                    roleIds: roleIds,
+                    ouId: OuId,
+                }).done(function () {
+                    abp.notify.success(l('SuccessfullyAdd'));
+                    parent.document.getElementById("btnRoleRefresh").click();
+                    $("#RoleModal").modal('hide');
+                });
+            }
+
+        });
+    });
+</script>
+
+<abp-modal size="Large" id="RoleModal">
+    <abp-modal-header title="@L["PleaseSelect"].Value"></abp-modal-header>
+    <abp-modal-body style="border-radius:0.25rem;font-size:14px;">
+        <abp-table striped-rows="true" hoverable-rows="true" id="identityRoleTable" class="table-borderless nowrap">
+            <thead Theme="Light">
+                <tr>
+                    <th></th>
+                    <th>@L["RoleName"]</th>
+
+                </tr>
+            </thead>
+        </abp-table>
+        <abp-input asp-for="OuId" />
+    </abp-modal-body>
+    <abp-modal-footer>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">@L["Cancel"]</button>
+        <button type="button" id="btnAddRoles" class="btn btn-primary">
+            <i class="fa fa-save"></i> <span>@L["Save"]</span>
+        </button>
+    </abp-modal-footer>
+
+</abp-modal>
+
+

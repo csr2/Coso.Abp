@@ -1,0 +1,545 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Coso.MyAbp.Web</RootNamespace>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <UserSecretsId>Coso.MyAbp-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\libs\clipboard\clipboard.js" />
+    <None Include="wwwroot\libs\clipboard\clipboard.min.js" />
+    <None Include="wwwroot\libs\prismjs\CHANGELOG.md" />
+    <None Include="wwwroot\libs\prismjs\components.js" />
+    <None Include="wwwroot\libs\prismjs\components\index.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-abap.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-abap.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-abnf.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-abnf.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-actionscript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-actionscript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ada.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ada.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-antlr4.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-antlr4.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-apacheconf.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-apacheconf.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-apl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-apl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-applescript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-applescript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-aql.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-aql.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-arduino.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-arduino.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-arff.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-arff.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-asciidoc.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-asciidoc.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-asm6502.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-asm6502.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-aspnet.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-aspnet.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-autohotkey.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-autohotkey.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-autoit.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-autoit.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bash.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bash.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-basic.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-basic.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-batch.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-batch.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bbcode.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bbcode.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bison.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bison.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bnf.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bnf.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-brainfuck.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-brainfuck.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-brightscript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-brightscript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bro.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-bro.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-c.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-c.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-cil.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-cil.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-clike.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-clike.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-clojure.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-clojure.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-cmake.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-cmake.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-coffeescript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-coffeescript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-concurnas.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-concurnas.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-core.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-core.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-cpp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-cpp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-crystal.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-crystal.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-csharp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-csharp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-csp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-csp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-css-extras.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-css-extras.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-css.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-css.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-d.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-d.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-dart.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-dart.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-dax.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-dax.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-diff.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-diff.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-django.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-django.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-dns-zone-file.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-dns-zone-file.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-docker.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-docker.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ebnf.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ebnf.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-eiffel.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-eiffel.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ejs.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ejs.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-elixir.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-elixir.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-elm.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-elm.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-erb.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-erb.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-erlang.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-erlang.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-etlua.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-etlua.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-excel-formula.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-excel-formula.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-factor.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-factor.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-firestore-security-rules.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-firestore-security-rules.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-flow.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-flow.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-fortran.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-fortran.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-fsharp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-fsharp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ftl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ftl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gcode.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gcode.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gdscript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gdscript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gedcom.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gedcom.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gherkin.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gherkin.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-git.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-git.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-glsl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-glsl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gml.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-gml.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-go.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-go.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-graphql.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-graphql.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-groovy.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-groovy.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-haml.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-haml.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-handlebars.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-handlebars.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-haskell.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-haskell.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-haxe.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-haxe.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-hcl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-hcl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-hpkp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-hpkp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-hsts.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-hsts.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-http.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-http.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ichigojam.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ichigojam.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-icon.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-icon.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-inform7.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-inform7.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ini.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ini.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-io.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-io.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-j.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-j.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-java.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-java.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javadoc.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javadoc.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javadoclike.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javadoclike.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javascript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javascript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javastacktrace.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-javastacktrace.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jolie.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jolie.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jq.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jq.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-js-extras.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-js-extras.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-js-templates.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-js-templates.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jsdoc.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jsdoc.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-json.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-json.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-json5.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-json5.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jsonp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jsonp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jsx.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-jsx.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-julia.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-julia.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-keyman.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-keyman.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-kotlin.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-kotlin.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-latex.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-latex.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-latte.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-latte.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-less.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-less.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lilypond.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lilypond.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-liquid.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-liquid.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lisp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lisp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-livescript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-livescript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-llvm.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-llvm.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lolcode.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lolcode.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lua.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-lua.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-makefile.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-makefile.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-markdown.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-markdown.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-markup-templating.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-markup-templating.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-markup.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-markup.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-matlab.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-matlab.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-mel.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-mel.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-mizar.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-mizar.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-monkey.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-monkey.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-moonscript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-moonscript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-n1ql.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-n1ql.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-n4js.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-n4js.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nand2tetris-hdl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nand2tetris-hdl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nasm.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nasm.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-neon.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-neon.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nginx.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nginx.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nim.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nim.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nix.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nix.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nsis.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-nsis.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-objectivec.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-objectivec.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ocaml.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ocaml.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-opencl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-opencl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-oz.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-oz.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-parigp.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-parigp.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-parser.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-parser.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pascal.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pascal.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pascaligo.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pascaligo.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pcaxis.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pcaxis.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-perl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-perl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-php-extras.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-php-extras.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-php.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-php.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-phpdoc.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-phpdoc.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-plsql.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-plsql.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-powerquery.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-powerquery.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-powershell.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-powershell.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-processing.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-processing.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-prolog.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-prolog.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-properties.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-properties.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-protobuf.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-protobuf.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pug.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pug.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-puppet.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-puppet.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pure.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-pure.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-python.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-python.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-q.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-q.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-qml.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-qml.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-qore.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-qore.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-r.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-r.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-reason.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-reason.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-regex.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-regex.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-renpy.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-renpy.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-rest.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-rest.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-rip.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-rip.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-roboconf.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-roboconf.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-robotframework.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-robotframework.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ruby.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-ruby.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-rust.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-rust.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sas.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sas.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sass.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sass.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-scala.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-scala.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-scheme.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-scheme.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-scss.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-scss.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-shell-session.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-shell-session.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-smalltalk.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-smalltalk.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-smarty.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-smarty.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-solidity.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-solidity.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-solution-file.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-solution-file.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-soy.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-soy.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sparql.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sparql.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-splunk-spl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-splunk-spl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sqf.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sqf.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sql.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-sql.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-stylus.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-stylus.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-swift.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-swift.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-t4-cs.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-t4-cs.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-t4-templating.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-t4-templating.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-t4-vb.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-t4-vb.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tap.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tap.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tcl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tcl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-textile.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-textile.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-toml.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-toml.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tsx.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tsx.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tt2.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-tt2.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-turtle.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-turtle.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-twig.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-twig.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-typescript.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-typescript.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vala.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vala.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vbnet.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vbnet.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-velocity.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-velocity.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-verilog.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-verilog.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vhdl.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vhdl.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vim.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-vim.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-visual-basic.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-visual-basic.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-wasm.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-wasm.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-wiki.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-wiki.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-xeora.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-xeora.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-xojo.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-xojo.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-xquery.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-xquery.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-yaml.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-yaml.min.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-zig.js" />
+    <None Include="wwwroot\libs\prismjs\components\prism-zig.min.js" />
+    <None Include="wwwroot\libs\prismjs\dependencies.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\autolinker\prism-autolinker.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\autolinker\prism-autolinker.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\autoloader\prism-autoloader.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\autoloader\prism-autoloader.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\command-line\prism-command-line.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\command-line\prism-command-line.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\copy-to-clipboard\prism-copy-to-clipboard.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\copy-to-clipboard\prism-copy-to-clipboard.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\custom-class\prism-custom-class.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\custom-class\prism-custom-class.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\data-uri-highlight\prism-data-uri-highlight.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\data-uri-highlight\prism-data-uri-highlight.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\diff-highlight\prism-diff-highlight.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\diff-highlight\prism-diff-highlight.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\download-button\prism-download-button.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\download-button\prism-download-button.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\file-highlight\prism-file-highlight.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\file-highlight\prism-file-highlight.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\filter-highlight-all\prism-filter-highlight-all.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\filter-highlight-all\prism-filter-highlight-all.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\highlight-keywords\prism-highlight-keywords.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\highlight-keywords\prism-highlight-keywords.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\inline-color\prism-inline-color.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\inline-color\prism-inline-color.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\jsonp-highlight\prism-jsonp-highlight.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\jsonp-highlight\prism-jsonp-highlight.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\keep-markup\prism-keep-markup.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\keep-markup\prism-keep-markup.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\line-highlight\prism-line-highlight.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\line-highlight\prism-line-highlight.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\line-numbers\prism-line-numbers.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\line-numbers\prism-line-numbers.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\match-braces\prism-match-braces.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\match-braces\prism-match-braces.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\normalize-whitespace\prism-normalize-whitespace.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\normalize-whitespace\prism-normalize-whitespace.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\previewers\prism-previewers.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\previewers\prism-previewers.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\remove-initial-line-feed\prism-remove-initial-line-feed.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\remove-initial-line-feed\prism-remove-initial-line-feed.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\show-invisibles\prism-show-invisibles.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\show-invisibles\prism-show-invisibles.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\show-language\prism-show-language.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\show-language\prism-show-language.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\toolbar\prism-toolbar.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\toolbar\prism-toolbar.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\treeview\prism-treeview.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\treeview\prism-treeview.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\unescaped-markup\prism-unescaped-markup.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\unescaped-markup\prism-unescaped-markup.min.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\wpd\prism-wpd.js" />
+    <None Include="wwwroot\libs\prismjs\plugins\wpd\prism-wpd.min.js" />
+    <None Include="wwwroot\libs\prismjs\prism.js" />
+    <None Include="wwwroot\libs\prismjs\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Pages\**\*.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Pages\**\*.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Coso.Abp.Core" Version="1.0.0" />
+    <PackageReference Include="Coso.Abp.Identity" Version="1.0.0" />
+    <PackageReference Include="Coso.Abp.Theme.AdminLTE" Version="1.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Coso.MyAbp.Application\Coso.MyAbp.Application.csproj" />
+    <ProjectReference Include="..\Coso.MyAbp.HttpApi\Coso.MyAbp.HttpApi.csproj" />
+    <ProjectReference Include="..\Coso.MyAbp.EntityFrameworkCore.DbMigrations\Coso.MyAbp.EntityFrameworkCore.DbMigrations.csproj" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.VirtualFileExplorer.Web" Version="3.1.2" />
+    
+  </ItemGroup>
+
+</Project>

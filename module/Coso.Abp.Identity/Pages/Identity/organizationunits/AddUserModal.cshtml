@@ -1,0 +1,119 @@
+﻿@page
+@inherits Coso.Abp.Identity.Pages.Identity.CosoIdentityPage
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Coso.Abp.Identity.Pages.Identity.organizationunits.AddUserModal
+@{
+    Layout = null;
+}
+
+
+<script>
+    $(function () {
+        var l = abp.localization.getResource('CosoAbpIdentity');
+        var _identityUserAppService = volo.abp.identity.identityUser;
+        var _organizationUnitService = coso.abp.identity.application.organizationUnit;
+        var dataTable = $('#identityUserTable').DataTable(abp.libs.datatables.normalizeConfiguration({
+            processing: true,
+            serverSide: true,
+            paging: true,
+            searching: false,
+            autoWidth: false,
+            info: false,
+            lengthChange: false,
+            scrollCollapse: true,
+            //iDisplayLength: 25,
+            ordering: [[1, "asc"]],
+            ajax: abp.libs.datatables.createAjax(_identityUserAppService.getList, function () {
+                var filter = $("#filter").val();
+                var model = {
+                    filter: filter
+                };
+                return model;
+            }),
+            columnDefs: [
+                {
+                    targets: 0,
+                    data: null,
+                    defaultContent: '',
+                    width: "1%",
+                    render: function (data, type, row) { // 返回自定义内容
+                        return `<input type="checkbox" value="${row.id}">`;
+                    },
+                },
+                { data: "userName", width: "53%" },
+                { data: "name", width: "30%" },
+            ],
+            select: {
+                style: 'multi',
+                selector: 'td:first-child input[type="checkbox"]'
+            }
+        }));
+        $('#searchUser').click(function (e) {
+            e.preventDefault();
+            dataTable.ajax.reload();
+        });
+        $('#btnAddUsers').click(function (e) {
+            e.preventDefault();
+            var array = new Array();
+            array = dataTable.rows({ selected: true }).data().toArray();
+            if (array.length == 0) {//如果一个没有勾选
+                abp.message.warn(l('PleaseSelect') + '用户人员！');
+            } else {
+                var userIds = [];
+                for (var i = 0; i < array.length; i++) {
+                    if (array[0].id != "") {
+                        userIds.push(array[i].id);
+                    }
+                }
+                var OuId = $("#OuId").val();
+                _organizationUnitService.addToOrganizationUnit({
+                    userIds: userIds,
+                    ouId: OuId,
+                }).done(function () {
+                    abp.notify.success(l('SuccessfullyAdd'));
+                    parent.document.getElementById("btnRefresh").click();
+                    $("#UserModal").modal('hide');
+                });
+            }
+
+        });
+    });
+</script>
+
+<abp-modal size="Large" id="UserModal">
+    <abp-modal-header title="@L["PleaseSelect"].Value"></abp-modal-header>
+    <abp-modal-body style="border-radius:0.25rem;font-size:14px;">
+        <abp-row>
+            <abp-column size-sm="_12" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["UserName"]</span>
+                </div>
+                <input type="text" class="form-control" id="filter">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary " id="searchUser"><i class="fa fa-search"></i></button>
+                </span>
+
+            </abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" hoverable-rows="true" id="identityUserTable" class="table-borderless nowrap">
+            <thead Theme="Light">
+                <tr>
+                    <th></th>
+                    <th>@L["UserName"]</th>
+                    <th>@L["MemberName"]</th>
+
+                </tr>
+            </thead>
+        </abp-table>
+        <abp-input asp-for="OuId" />
+    </abp-modal-body>
+    <abp-modal-footer>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">@L["Cancel"]</button>
+        <button type="button" id="btnAddUsers" class="btn btn-primary">
+            <i class="fa fa-save"></i> <span>@L["Save"]</span>
+        </button>
+    </abp-modal-footer>
+
+</abp-modal>
+
+

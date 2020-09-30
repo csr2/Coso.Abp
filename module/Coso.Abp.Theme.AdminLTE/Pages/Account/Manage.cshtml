@@ -1,0 +1,79 @@
+﻿@page
+@model Coso.Abp.Theme.AdminLTE.Pages.Account.ManageModel
+@using Coso.Abp.Theme.AdminLTE.Localization
+@using Volo.Abp.Identity.Settings
+@using Volo.Abp.Settings
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.Account.Localization
+@inject ISettingProvider SettingManager
+@inject IThemeManager ThemeManager
+@inject IHtmlLocalizer<AdminLTEResource> TL
+@inject IHtmlLocalizer<AccountResource> L
+@{
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
+    var isUserNameUpdateEnabled = string.Equals(await SettingManager.GetOrNullAsync(IdentitySettingNames.User.IsUserNameUpdateEnabled), "true",
+        StringComparison.OrdinalIgnoreCase);
+
+    var isEmailUpdateEnabled = string.Equals(await SettingManager.GetOrNullAsync(IdentitySettingNames.User.IsEmailUpdateEnabled), "true",
+        StringComparison.OrdinalIgnoreCase);
+}
+@section scripts {
+    <abp-script src="/Pages/Account/Manage.js" />
+}
+<abp-row class="entry-row">
+    <div class="col-auto">
+        <h1 class="content-header-title">@L["ManageYourProfile"]</h1>
+    </div>
+    <div class="col-lg-auto pl-lg-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/"> <i class="fa fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item active"> @L["ManageYourProfile"] </li>
+        </ol>
+    </div>
+    <div class="col">
+        <div class="row justify-content-end mx-n1">
+            <div class="col-auto px-1 pt-2">
+
+            </div>
+        </div>
+    </div>
+</abp-row>
+
+<abp-card>
+    <abp-card-body>
+        <abp-tabs tab-style="PillVertical">
+            <abp-tab title="@L["ChangePassword"].Value">
+                <h4>@L["ChangePassword"].Value</h4><hr />
+                <abp-dynamic-form abp-model="@Model.ChangePasswordInfoModel" id="ChangePasswordForm">
+                    <abp-form-content />
+                    <abp-button type="submit" button-type="Primary" text="@L["Submit"].Value" />
+                </abp-dynamic-form>
+            </abp-tab>
+            <abp-tab title="@L["PersonalSettings"].Value">
+                <h4>@L["PersonalSettings"].Value</h4><hr />
+                <form method="post" id="PersonalSettingsForm">
+
+                    <abp-input asp-for="PersonalSettingsInfoModel.UserName" readonly="!isUserNameUpdateEnabled" />
+
+                    <abp-row>
+                        <abp-column size-md="_6">
+                            <abp-input asp-for="PersonalSettingsInfoModel.Name" />
+                        </abp-column>
+                        <abp-column size-md="_6">
+                            <abp-input asp-for="PersonalSettingsInfoModel.Surname" />
+                        </abp-column>
+                    </abp-row>
+
+                    <abp-input asp-for="PersonalSettingsInfoModel.Email" readonly="!isEmailUpdateEnabled" />
+
+                    <abp-input asp-for="PersonalSettingsInfoModel.PhoneNumber" />
+
+                    <abp-button type="submit" button-type="Primary" text="@L["Submit"].Value" />
+                </form>
+            </abp-tab>
+        </abp-tabs>
+    </abp-card-body>
+</abp-card>

@@ -1,0 +1,217 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Coso.Abp.Core.Pages.Admin.Auditing.DetailModel
+@inherits Coso.Abp.Core.Pages.CosoAbpCorePage
+@{
+    Layout = null;
+}
+
+    <abp-modal size="Large">
+        <abp-modal-header title="@L["Detail"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-tabs name="create-user-modal-tabs">
+                <abp-tab title=" @L["Overall"].Value">
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["HttpStatusCode"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            <span class="badge  badge-danger">@Model.AuditLog.HttpStatusCode</span>
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["HttpMethod"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @if (Model.AuditLog.HttpMethod == "GET")
+                            {
+                                <span class="badge badge-dark">@Model.AuditLog.HttpMethod</span>
+                            }
+                            else @if (Model.AuditLog.HttpMethod == "POST")
+                            {
+                                <span class="badge badge-success">@Model.AuditLog.HttpMethod</span>
+                            }
+                            else { 
+                                  <span class="badge  badge-danger">@Model.AuditLog.HttpMethod</span>
+                            }
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["Url"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.Url
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["ClientIpAddress"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.ClientIpAddress
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["ClientName"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.ClientName
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["Exceptions"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            <pre>@Model.AuditLog.Exceptions</pre> 
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["UserName"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.UserName
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["ExecutionTime"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.ExecutionTime
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["ExecutionDuration"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.ExecutionDuration
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["BrowserInfo"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.BrowserInfo
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["ApplicationName"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.ApplicationName
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["CorrelationId"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.CorrelationId
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["Comments"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @Model.AuditLog.Comments
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                    <abp-row>
+                        <abp-column size-sm="_3">
+                            <strong>@L["ExtraProperties"].Value</strong>
+                        </abp-column>
+                        <abp-column size-sm="_9">
+                            @foreach (var item in Model.AuditLog.ExtraProperties) {
+                            <span>@item.Key":"@item.Value.ToString() </span><br />
+                            }
+
+                        </abp-column>
+                    </abp-row>
+                    <hr />
+                </abp-tab>
+                <abp-tab title="@L["Actions"].Value (@Model.AuditLog.Actions.Count())">
+
+                    @if (Model.AuditLog.Actions.Count() > 0)
+                    {
+                          var clo=0;
+                        <div role="tabpanel">
+                           
+                            @foreach (var item in Model.AuditLog.Actions)
+                            {
+                                var cloId="Item"+clo;clo++;
+                                
+                             <div class="mb-3 border border-dark rounded ">
+                                <abp-button button-type="Primary" class="btn-block" abp-collapse-id="@cloId" text="@item.ServiceName" />
+                                <abp-collapse-body id="@cloId">
+                                    <div class="m-3">
+                                        <div class="row">
+                                            <div class="col-form-label col col-lg-3">
+                                                <strong>@L["ExecutionDuration"].Value</strong>
+                                            </div>
+                                            <div class="col-form-label col col-lg-9">
+                                                @item.ExecutionDuration ms
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-form-label col col-lg-3">
+                                                <strong>@L["Parameters"].Value</strong>
+                                            </div>
+                                            <div class="col-form-label col col-lg-9 ">
+                                                <pre lang="json" class="p-2">@item.Parameters</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </abp-collapse-body>
+                            </div>
+
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                     <div class="text-center ng-tns-c96-12 ng-star-inserted"> No actions(s) </div>
+                    }
+                </abp-tab>
+                <abp-tab title="@L["Changes"].Value (@Model.AuditLog.EntityChanges.Count())">
+                    @if (Model.AuditLog.EntityChanges.Count() > 0)
+                    {
+                        @foreach (var item in Model.AuditLog.EntityChanges)
+                        {
+                            <span>@item.EntityTypeFullName</span><br />
+                        }
+                    }
+                    else
+                    {
+
+                        <div class="text-center ng-tns-c96-12 ng-star-inserted"> No change(s) </div>
+                    }
+                </abp-tab>
+            </abp-tabs>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Close)"></abp-modal-footer>
+    </abp-modal>
+
+

@@ -1,0 +1,80 @@
+﻿@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@using Volo.Abp.AspNetCore.MultiTenancy
+@using Volo.Abp.AspNetCore.Mvc.AntiForgery
+@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+@using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.Localization
+@using Coso.Abp.Theme.AdminLTE.Bundling
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.MainNavbar
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.PageAlerts
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Components
+@using Volo.Abp.MultiTenancy
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling
+@using Volo.Abp.MultiTenancy
+
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IBrandingProvider BrandingProvider
+@inject IOptions<AbpMultiTenancyOptions> MultiTenancyOptions
+@inject ICurrentTenant CurrentTenant
+@inject IStringLocalizer<AbpUiMultiTenancyResource> MultiTenancyStringLocalizer
+@inject ITenantResolveResultAccessor TenantResolveResultAccessor
+
+@{
+    Layout = null;
+    AbpAntiForgeryManager.SetCookie();
+    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
+}
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentCulture.Name">
+<head>
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Account)
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="/favicon.ico">
+    <title>@(ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title)</title>
+    <abp-style-bundle name="@AdminLTEThemeBundles.Styles.Global" />
+    @await RenderSectionAsync("styles", false)
+    @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Account)
+    <style>
+        html, body, .container, .row { height: 100%;}
+        body {font-family: sans-serif;font-weight: 400;font-size: 14px;line-height: 21px;background: #f4f4f7;color: #000;width: 100%;  position: relative;opacity: 0.85; }
+        body {
+            background: url(/themes/adminlte/img/login_bg1.png);
+            background-size: cover;
+            background-position: center;
+        }
+        .card .card-body {padding: 28px;}
+        .card .card-header {  border-bottom: 1px solid rgba(27,29,41,.05);padding: 15px 28px; background: none; }
+        .card .card-header .card-title {font-size: 1.25em; margin: 2px 0;color: #000;font-family: "Poppins",sans-serif;font-weight: 600;line-height: 1.5;}
+        .login { position: absolute;top: 50%; left: 50%; margin-top: -300px;margin-left: -190px; width: 380px;}
+    </style>
+    <script type="text/javascript">
+       // var bodyBgs = [];
+        //bodyBgs[0] = "/themes/adminlte/img/login_bg.png";
+        //bodyBgs[0] = "/themes/adminlte/img/login_bg1.png";
+        //bodyBgs[1] = "/themes/adminlte/img/login_bg2.jpg";
+        //bodyBgs[1] = "/themes/adminlte/img/login_bg3.jpg";
+        //var randomBgIndex = Math.round(Math.random() * 1);
+        //输出随机的背景图
+        //document.write('<style>body{background:url(' + bodyBgs[randomBgIndex] + '); background-size: cover; background-position: center;}</style>');
+    </script>
+</head>
+<body class="abp-account-layout bg-light text-sm" style="height:100%;">
+    <div class="@containerClass">
+        @*@(await Component.InvokeAsync<PageAlertsViewComponent>())*@
+        @RenderBody()
+    </div>
+    <abp-script-bundle name="@StandardBundles.Scripts.Global" />
+    <script src="~/Abp/ApplicationConfigurationScript"></script>
+    <script src="~/Abp/ServiceProxyScript"></script>
+    @await RenderSectionAsync("scripts", false)
+    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Account)
+</body>
+
+</html>

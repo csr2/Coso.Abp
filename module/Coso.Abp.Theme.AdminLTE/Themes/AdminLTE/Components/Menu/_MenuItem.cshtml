@@ -1,0 +1,55 @@
+﻿@using Volo.Abp.UI.Navigation
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.Menu
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@inject IPageLayout PageLayout
+@model ApplicationMenuItem
+@{
+    var elementId = "";
+    var cssClass = "";
+    var disabled = "";
+    var active = PageLayout.Content.MenuItemName == Model.Name ? "active" : "";
+    var childActive = MainNavbarMenuViewComponent.ChildActive(Model.Items, PageLayout.Content.MenuItemName);
+    var url = string.IsNullOrEmpty(Model.Url) ? "#" : Url.Content(Model.Url);
+    if (childActive  )
+    {
+        cssClass = "menu-open";
+        elementId = "active";
+        disabled = "display: block;";
+    }
+}
+@if (Model.IsLeaf)
+{
+    if (Model.Url != null)
+    {
+        <li class="nav-item">
+
+            <a href="@url" class="nav-link @elementId @active" target="@Model.Target">
+                <i class="nav-icon @(Model.Icon ?? "fa fa-dot-circle-o")"></i>
+                <p>
+                    @Model.DisplayName
+                </p>
+
+            </a>
+        </li>
+    }
+}
+else
+{
+    <li class="nav-item has-treeview @cssClass">
+        <a class="nav-link @elementId" href="#" target="@Model.Target">
+            <i class="nav-icon @(Model.Icon ?? "fa fa-dot-circle-o")"></i>
+            <p>
+                @Model.DisplayName
+                <i class="fa fa-angle-left right"></i>
+            </p>
+
+        </a>
+        <ul class="nav nav-treeview" style="@disabled">
+            @foreach (var childMenuItem in Model.Items)
+            {
+                @await Html.PartialAsync("~/Themes/AdminLTE/Components/Menu/_MenuItem.cshtml", childMenuItem)
+            }
+        </ul>
+    </li>
+
+}

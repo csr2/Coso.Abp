@@ -1,0 +1,105 @@
+@page
+@using Coso.Abp.Identity.Pages.Identity.organizationunits
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.JsTree
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.Lodash
+@using Volo.Abp.Identity.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<IdentityResource> IL
+@inherits Coso.Abp.Identity.Pages.Identity.CosoIdentityPage
+@model IndexModel
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["OrganizationUnits"].Value;
+    PageLayout.Content.BreadCrumb.Add(IL["Menu:IdentityManagement"].Value);
+    PageLayout.Content.MenuItemName = "OrganizationUnits";
+}
+
+
+@section scripts
+{
+    <abp-script src="/Pages/Identity/organizationunits/index.js" />
+    <abp-script type="typeof(JsTreeScriptContributor)" />
+    <abp-script type="typeof(LodashScriptContributor)" />
+}
+@section styles
+{
+    <abp-style src="/Pages/Identity/organizationunits/index.css" />
+    @*<abp-style type="typeof(JsTreeStyleContributor)" />*@
+    <abp-style src="/libs/jstree/themes/lep/lep.css" />
+
+}
+<div class="row">
+    <div class="col-12 col-lg-6 col-xl-5 ">
+        <div class="card">
+            <div class="card-header justify-content-between" style="padding: .75rem 1.25rem;">
+                <h5 style="float:left;padding-top: 5px;">  @L["OrganizationTree"].Value </h5>
+                <button class="btn btn-sm btn-primary" id="AddRootUnitButton" style="float:right">
+                    <i class="fas fa-plus mr-1"></i> @L["AddRootUnit"].Value
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="OrganizationUnitEditTree"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-7">
+        <abp-tabs name="create-user-modal-tabs">
+            <abp-tab title="@L["Members"].Value">
+                <div class="row" id="selectmembers">
+                    <p class="text-muted">@L["SelectMembers"].Value</p>
+                </div>
+                <div id="OuMembersTable" style="display:none">
+                    <div class="text-right">
+
+                        <abp-button id="AddUserToOuButton"
+                                    text="@L["AddMember"].Value"
+                                    icon="plus"
+                                    button-type="Primary" class="mb-2 mr-2 btn-sm" />
+                        <button class="btn btn-outline-info float-right  mr-2 btn-sm" id="btnRefresh" style="">
+                            <i class="fa fa-refresh"></i> @L["Refresh"].Value
+                        </button>
+                    </div>
+                    <abp-table striped-rows="true" hoverable-rows="true" id="organizationMembersTable" class="nowrap">
+                        <thead Theme="Light">
+                            <tr>
+                                <th>@L["Actions"]</th>
+                                <th>@L["UserName"].Value</th>
+                                <th>@L["MemberName"].Value</th>
+
+                            </tr>
+                        </thead>
+                    </abp-table>
+                </div>
+            </abp-tab>
+            <abp-tab title="@L["Roles"].Value">
+                <div class="row" id="selectroles">
+                    <p class="text-muted">@L["SelectRoles"].Value</p>
+                </div>
+
+                <div id="OuRolesTable" style="display:none">
+                    <div class="text-right">
+                        <abp-button id="AddRoleToOuButton"
+                                    text="@L["AddRole"].Value"
+                                    icon="plus"
+                                    button-type="Primary" class="mb-2 mr-2 btn-sm" />
+                        <button class="btn btn-outline-info float-right  mr-2 btn-sm" id="btnRoleRefresh" style="">
+                            <i class="fa fa-refresh"></i> @L["Refresh"].Value
+                        </button>
+                    </div>
+                    <abp-table striped-rows="true" hoverable-rows="true" id="organizationRolesTable" class="nowrap">
+                        <thead Theme="Light">
+                            <tr>
+                                <th>@L["Actions"]</th>
+                                <th>@L["RoleName"].Value</th>
+                            </tr>
+                        </thead>
+                    </abp-table>
+                </div>
+            </abp-tab>
+
+        </abp-tabs>
+    </div>
+</div>
+

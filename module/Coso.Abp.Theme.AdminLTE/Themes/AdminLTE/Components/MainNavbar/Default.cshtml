@@ -1,0 +1,19 @@
+﻿@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.Brand
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.Menu
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.Toolbar
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="main-navbar">
+    @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#main-navbar-collapse" aria-controls="main-navbar-collapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
+        </ul>
+        <span id="main-navbar-tools">
+            @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
+        </span>
+    </div>
+</nav>

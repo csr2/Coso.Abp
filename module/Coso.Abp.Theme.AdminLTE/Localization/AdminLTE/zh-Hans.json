@@ -1,0 +1,17 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "Welcome": "欢迎",
+    "Nav:Home": "首页",
+    "ChangeProfilePicture": "修改头像",
+    "QueryCondition": "查询条件",
+    "Name": "姓名",
+    "Filter": "条件",
+    "Nav:Contact": "联系我们",
+    "Input:Search": "检索",
+    "AllRightsReserved": "版权所有",
+    "Version": "版本",
+    "SkinSettings": "主题设置",
+    "BackList": "返回列表"
+  }
+}

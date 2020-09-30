@@ -1,0 +1,163 @@
+﻿@using Volo.Abp.AspNetCore.Mvc.AntiForgery
+@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Coso.Abp.Theme.AdminLTE.Bundling;
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.Toolbar.UserMenu;
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.Toolbar.LanguageSwitch;
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.Menu
+@using Coso.Abp.Theme.AdminLTE.Themes.AdminLTE.Components.PageAlerts
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Components
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
+@using Volo.Abp.Settings
+@using System.Linq;
+@*@using Coso.Abp.Theme.AdminLTE.Localization
+    @using Microsoft.AspNetCore.Mvc.Localization
+
+    @inject IHtmlLocalizer<AdminLTEResource> TL*@
+@inject IBrandingProvider BrandingProvider
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IBrandingProvider BrandingProvider
+@inject IPageLayout PageLayout
+@inject ISettingProvider SettingProvider
+
+@{ Layout = null;
+                AbpAntiForgeryManager.SetCookie();
+                var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
+
+                var pageTitle = ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title; //TODO: Discard to get from Title
+
+                if (PageLayout.Content.Title != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(pageTitle))
+                    {
+                        pageTitle = " | " + pageTitle;
+                    }
+
+                    pageTitle = PageLayout.Content.Title + pageTitle;
+                }
+
+                var themenameList = await SettingProvider.GetAllAsync();
+                var themeEntity = themenameList.Where(s => s.Name == "Connection.Theme").FirstOrDefault();
+                var themename = "";
+                var skin = "primary";
+                var aside = "dark";
+                if (themeEntity != null)
+                {
+                    themename = themeEntity.Value;
+                    if (themename == "Style1" || themename == "Style4")
+                    {
+                        skin = "primary";
+                    }
+                    if (themename == "Style2" || themename == "Style5")
+                    {
+                        skin = "success";
+                    }
+                    if (themename == "Style3" || themename == "Style6")
+                    {
+                        skin = "indigo";
+                    }
+                    aside = (themename == "Style4" || themename == "Style5" || themename == "Style6") ? "light" : aside;
+                } }
+
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentCulture.Name">
+<head>
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Application)
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="/favicon.ico">
+    <title>@pageTitle</title>
+    <abp-style-bundle name="@AdminLTEThemeBundles.Styles.Global" />
+    @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
+    @await RenderSectionAsync("styles", false)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
+    <style>
+        .user-panel .dropdown-menu a:hover {
+            color: #212529
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini body-@skin">
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-dark navbar-@skin">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    @(await Component.InvokeAsync<LanguageSwitchViewComponent>())
+                </li>
+                <li class="nav-item dropdown user-menu">
+                    @(await Component.InvokeAsync<UserMenuViewComponent>())
+                </li>
+                <li class="nav-item nav-fullscreen">
+                    <a href="javascript:void(0);" id="btnFullscreen" class="nav-link">
+                        <i class="fas fa-expand"></i>
+                        <i class="fas fa-compress" style="display:none;"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <aside class="main-sidebar elevation-4 sidebar-@aside-@skin">
+            <a href="#" class="brand-link  navbar-@skin">
+
+                <img src="@(string.IsNullOrWhiteSpace(Url.Content(BrandingProvider.LogoUrl)) ? "/themes/adminlte/img/AdminLTELogo.png" : BrandingProvider.LogoUrl)"
+                     alt="AdminLTE Logo"
+                     class="brand-image img-circle elevation-3"
+                     style="opacity: .8" width="33" height="33">
+                <span class="brand-text logo-text">@BrandingProvider.AppName</span>
+            </a>
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+                        @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content adminlte" style="padding-bottom: 15px;">
+                <div class="container-fluid">
+                    @if (PageLayout.Content.BreadCrumb.Items.Count > 0)
+                    {
+        <abp-row class="entry-row">
+            <div class="col-auto">
+                <h1 class="content-header-title">@PageLayout.Content.Title</h1>
+            </div>
+            <div class="col-lg-auto pl-lg-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a> </li>
+                    @if (PageLayout.Content.BreadCrumb.Items[0].Text != "NoBreadCrumb")
+                    {
+    <li class="breadcrumb-item"> @PageLayout.Content.BreadCrumb.Items[0].Text </li>}
+                    <li class="breadcrumb-item active"> @PageLayout.Content.Title </li>
+                </ol>
+            </div>
+            <div class="col">
+                <div class="text-lg-right px-1 pt-2">
+                    @await RenderSectionAsync("button", false)
+                </div>
+            </div>
+        </abp-row>}
+                    @(await Component.InvokeAsync<PageAlertsViewComponent>())
+                    @RenderBody()
+                </div>
+            </section>
+        </div>
+    </div>
+    <abp-script-bundle name="@AdminLTEThemeBundles.Scripts.Global" />
+    <script type="text/javascript" src="~/Abp/ApplicationConfigurationScript"></script>
+    <script type="text/javascript" src="~/Abp/ServiceProxyScript"></script>
+
+    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+    @await RenderSectionAsync("scripts", false)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Application)
+</body>
+
+</html>

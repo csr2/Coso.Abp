@@ -1,0 +1,104 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model Coso.Abp.Core.Pages.TextTemplats.TemplatContentsModel
+@inherits Coso.Abp.Core.Pages.CosoAbpCorePage
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Menu:TextTemplats"].Value;
+    PageLayout.Content.MenuItemName = "CosoTextTemplats";
+}
+
+
+@section styles
+{
+    <style>
+        .alert.alert-danger {
+            border-color: #c2185b;
+            color: #081449;
+        }
+
+        .alert {
+            padding: 18px;
+            background: #fff;
+            color: #000;
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,.1), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.15);
+            border-color: 300;
+            border-radius: 2px;
+            border-width: 2px;
+        }
+
+        .card .card-header {
+            border-bottom: 0;
+            padding: 14.4px 24px;
+            background: none;
+        }
+    </style>
+}
+@section scripts {
+    <abp-script src="/Pages/TextTemplats/index.js" />
+}
+
+<section class="content-header">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h3>
+                @L["TextTemplats"].Value
+                <small>
+                    <i class="fa fa-arrow-circle-left"></i>
+                    <a href="Index">@L["ReturnToTemplates"].Value</a>
+                </small>
+            </h3>
+        </div>
+        <div class="col-sm-6 text-lg-right px-1 pt-2">
+            @*<button type="submit" class="btn btn-primary float-sm-right">
+                    <i class="fa fa-check"></i> <span>@L["Save"]</span>
+                </button>*@
+
+            <button id="edit-unique-localization" type="button" class="btn btn-link ml-1 float-sm-right">
+                <span>@L["Customizeperculture"]</span>
+            </button>
+            <button id="restore-to-default" type="button" class="btn btn-danger ml-1 float-sm-right">
+                <span>@L["RestoreToDefault"]</span>
+            </button>
+            <button id="save-content" type="button" class="btn btn-primary ml-1 float-sm-right">
+                <span>@L["SaveContent"]</span>
+            </button>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div role="alert" class="alert alert-danger">TextTemplateManagement::InlineContentDescription</div>
+        <abp-card>
+            <abp-card-header>
+                <label>@L["TemplateDefinition:Name"]: <strong>@Model.ViewModel.Name</strong></label>
+            </abp-card-header>
+            <abp-card-body>
+                <form method="post" id="btnSubmit">
+                    <abp-row>
+                        <abp-column>
+                            <div class="form-group">
+                                <label for="TemplateContent">@L["TemplatesContent"]</label><span> * </span>
+                                <textarea id="TemplateContent" name="TemplateContent" rows="12" class="form-control">@Html.Raw(Model.Content)</textarea>
+                            </div>
+                        </abp-column>
+                    </abp-row>
+                    @*<abp-row>
+                            <abp-column size-sm="_4">
+                                <a role="button" class="btn btn-primary" href="Index">
+                                    <i class="fa fa-arrow-left mr-1"></i><span>@L["ReturnToTemplates"]</span>
+                                </a>
+                            </abp-column>
+                            <abp-column size-sm="_8">
+                                <div class="float-right">
+                                    <button id="save-content" type="button" class="btn btn-primary"><span>@L["SaveContent"]</span></button>
+                                    <button id="restore-to-default" type="button" class="btn btn-danger ml-1"><span>@L["RestoreToDefault"]</span></button>
+                                    <button id="edit-unique-localization" type="button" class="btn btn-link ml-1"><span>@L["Customizeperculture"]</span></button>
+                                </div>
+                            </abp-column>
+                        </abp-row>*@
+                </form>
+            </abp-card-body>
+        </abp-card>
+    </div>
+</section>

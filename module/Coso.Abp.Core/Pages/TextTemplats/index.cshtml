@@ -1,0 +1,61 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model Coso.Abp.Core.Pages.TextTemplats.IndexModel
+@inherits Coso.Abp.Core.Pages.CosoAbpCorePage
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Menu:TextTemplats"].Value;
+    PageLayout.Content.BreadCrumb.Add("NoBreadCrumb");
+    PageLayout.Content.MenuItemName = "CosoTextTemplats";
+}
+@section scripts {
+    <abp-script src="/Pages/TextTemplats/index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <h5 class="card-title" data-card-widget="collapse" aria-expanded="false">
+            @L["QueryCondition"]
+        </h5>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["Filter"]</span>
+                </div>
+                <input type="text" class="form-control" id="filter">
+            </abp-column>
+
+
+            <abp-column size-sm="_3" class="input-group">
+                <button type="button" id="search" class="btn btn-primary btn-search">
+                    <i class="fa fa-search"></i>
+                    @L["Search"].Value
+                </button>
+            </abp-column>
+        </abp-row>
+    </abp-card-body>
+</abp-card>
+
+<abp-card>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="TextTemplatsTable">
+            <thead Theme="Light">
+                <tr>
+                    <th>@L["Actions"]</th>
+                    <th>@L["TemplateDefinition:Name"]</th>
+                    <th>@L["TemplateDefinition:IsInlineLocalized"]</th>
+                    <th>@L["TemplateDefinition:IsLayout"]</th>
+                    <th>@L["TemplateDefinition:Layout"]</th>
+                    <th>@L["TemplateDefinition:DefaultCultureName"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>

@@ -1,0 +1,24 @@
+@page
+@using Microsoft.Extensions.Localization
+@using Coso.Abp.Identity.Localization
+@*@inherits Coso.Abp.Identity.Pages.Identity.CosoIdentityPage*@
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Coso.Abp.Identity.Pages.Identity.organizationunits.CreateModalModel
+@inject IStringLocalizer<CosoIdentityResource> L
+@{ Layout = null; }
+
+<form method="post" data-ajaxForm="true" asp-page="CreateModal">
+
+
+    <abp-modal>
+        <abp-modal-header title="@L["Create"].Value"></abp-modal-header>
+        <abp-modal-body>
+
+            <abp-input asp-for="OrganizationUnit.DisplayName" />
+            @*<abp-input asp-for="OrganizationUnit.ParentId" value="@Model.ParentId" />*@
+            <abp-input asp-for="ParentId" />
+
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

@@ -1,0 +1,20 @@
+@page
+@inherits Coso.Abp.Identity.Pages.Identity.CosoIdentityPage
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Coso.Abp.Identity.Pages.Identity.organizationunits.EditModal
+@{
+    Layout = null;
+}
+
+<form method="post" data-ajaxForm="true" asp-page="EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["Edit"].Value"></abp-modal-header>
+        <abp-modal-body>
+
+            <abp-input asp-for="OrganizationUnit.DisplayName" />
+            <abp-input asp-for="Id" />
+
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

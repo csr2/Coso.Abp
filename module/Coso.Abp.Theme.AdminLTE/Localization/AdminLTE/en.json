@@ -1,0 +1,12 @@
+{
+  "culture": "en",
+  "texts": {
+    "Nav:Home": "Home",
+    "ChangeProfilePicture": "Change profile picture",
+    "Nav:Contact": "Contact",
+    "Input:Search": "Search",
+    "AllRightsReserved": "All rights reserved",
+    "Version": "Version",
+    "BackList": "Back List"
+  }
+}

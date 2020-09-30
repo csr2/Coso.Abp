@@ -1,0 +1,92 @@
+@page
+@using Coso.Abp.Identity.Pages.Account.securitylogs
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.Identity.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+
+@inject IHtmlLocalizer<IdentityResource> IL
+@inherits Coso.Abp.Identity.Pages.Identity.CosoIdentityPage
+@model IndexModel
+@inject IPageLayout PageLayout
+@inject IThemeManager ThemeManager
+@{
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
+
+    PageLayout.Content.Title = L["MyIdentitySecurityLogs"].Value;
+    PageLayout.Content.BreadCrumb.Add("NoBreadCrumb");
+    PageLayout.Content.MenuItemName = "MyIdentitySecurityLogs";
+}
+
+
+@section scripts
+{
+    <abp-script src="/Pages/Account/securitylogs/index.js" />
+}
+@section styles
+{
+    <abp-style src="/Pages/Account/securitylogs/index.css" />
+}
+<!-- 搜索条件区域 start -->
+<abp-card>
+    <abp-card-header>
+        <h5 class="card-title" data-card-widget="collapse">
+            @L["QueryCondition"]
+        </h5>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["SecurityLogsStartTime"]</span>
+                </div>
+                <input type="date" class="form-control" id="StartTime">
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["SecurityLogsEndTime"]</span>
+                </div>
+                <input type="date" class="form-control" id="EndTime">
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["SecurityLogsAction"]</span>
+                </div>
+                <input type="text" class="form-control" id="Action">
+            </abp-column>
+            <abp-column size-sm="_3">
+                <button type="button" id="search" class="btn btn-primary btn-block btn-search ">
+                    <i class="fas fa-search"></i>
+                </button>
+            </abp-column>
+        </abp-row>
+
+    </abp-card-body>
+
+</abp-card>
+<!-- 搜索条件区域 end -->
+<abp-card>
+    <!-- 表格区域 start -->
+    <abp-card-body>
+        <abp-table striped-rows="true" hoverable-rows="true" id="SecurityLogs" class="nowrap">
+            <thead Theme="Light">
+                <tr>
+                    <th>@L["SecurityLogsCreationTime"]</th>
+                    <th>@L["SecurityLogsAction"]</th>
+                    <th>@L["SecurityLogsClientIpAddress"]</th>
+                    <th>@L["SecurityLogsBrowserInfo"]</th>
+                    <th>@L["SecurityLogsApplicationName"]</th>
+                    <th>@L["SecurityLogsIdentity"]</th>
+                    <th>@L["SecurityLogsUserName"]</th>
+                    <th>@L["SecurityLogsClientId"]</th>
+                    <th>@L["SecurityLogsCorrelationId"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+    <!-- 表格区域 end -->
+</abp-card>
+

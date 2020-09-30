@@ -1,0 +1,8 @@
+﻿{
+  "Connection.Theme": {
+    "Group1": "AdminLteTheme",
+    "Group2": "Skin",
+    "Type": "select",
+    "Options": "|Style1|Style2|Style3|Style4|Style5|Style6"
+  }
+}

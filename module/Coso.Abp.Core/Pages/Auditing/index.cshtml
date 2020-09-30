@@ -1,0 +1,122 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model Coso.Abp.Core.Pages.Admin.Auditing.IndexModel
+@inherits Coso.Abp.Core.Pages.CosoAbpCorePage
+@inject IPageLayout PageLayout
+@{
+    ViewData["Title"] = "审计日志管理";
+    PageLayout.Content.Title = L["Menu:Auditing"].Value;
+    PageLayout.Content.BreadCrumb.Add("NoBreadCrumb");
+    PageLayout.Content.MenuItemName = "CosoAuditing";
+}
+@section scripts {
+    <abp-script src="/Pages/Auditing/index.js" />
+}
+
+<!-- 搜索条件区域 start -->
+<abp-card>
+    <abp-card-header>
+        <h5 class="card-title" data-card-widget="collapse">
+            @L["QueryCondition"]
+        </h5>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            @*<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>*@
+        </div>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["UserName"]</span>
+                </div>
+                <input type="text" class="form-control" id="UserName">
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["Url"]</span>
+                </div>
+                <input type="text" class="form-control" id="Url">
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["MinExecutionDuration"]</span>
+                </div>
+                <input type="number" class="form-control" id="MinExecutionDuration">
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["MaxExecutionDuration"]</span>
+                </div>
+                <input type="number" class="form-control" id="MaxExecutionDuration">
+            </abp-column>
+        </abp-row>
+        <abp-row>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["ApplicationName"]</span>
+                </div>
+                <input type="text" class="form-control" id="UserName">
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["CorrelationId"]</span>
+                </div>
+                <input type="text" class="form-control" id="Url">
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["HttpMethod"]</span>
+                </div>
+                <select class="form-control" id="HttpMethod" asp-items="@Model.HttpMethodList">
+                    <option value=""></option>
+                </select>
+            </abp-column>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["HttpStatusCode"]</span>
+                </div>
+                <select class="form-control" id="HttpStatusCode" asp-items="@Model.HttpStatusCodeList">
+                    <option value=""></option>
+                </select>
+            </abp-column>
+        </abp-row>
+        <abp-row>
+            <abp-column size-sm="_3" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@L["HasException"]</span>
+                </div>
+                <select class="form-control" id="HasException">
+                    <option value=""></option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </abp-column>
+            <abp-column size-sm="_4">
+                <button type="button" id="search" class="btn btn-primary btn-search ">
+                    <i class="fa fa-search"></i>
+                    @L["Search"].Value
+                </button>
+            </abp-column>
+        </abp-row>
+    </abp-card-body>
+
+</abp-card>
+<!-- 搜索条件区域 end -->
+<abp-card>
+    <!-- 表格区域 start -->
+    <abp-card-body>
+        <abp-table striped-rows="true" hoverable-rows="true"  id="Auditing"  class="nowrap">
+            <thead Theme="Light">
+                <tr>
+                    <th></th>
+                    <th>@L["HttpRequest"]</th>
+                    <th>@L["UserName"]</th>
+                    <th>@L["ClientIpAddress"]</th>
+                    <th>@L["ExecutionTime"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+    <!-- 表格区域 end -->
+</abp-card>
