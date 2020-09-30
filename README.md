@@ -1,5 +1,5 @@
 # Coso.Abp.Theme.AdminLTE
- 东拼西凑得adminlte皮肤+一些abp基础功能
+ 东拼西凑得adminlte皮肤和一些abp基础功能
 
 ## Create a project using abp CLI
 
