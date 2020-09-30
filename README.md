@@ -14,7 +14,7 @@ abp framework mvc ui theme package,It uses bootstrap, so it is compatible with a
 * Open the module class of the .web project and add the module CosoAbpCoreModule and CosoAbpIdentityModule
 
 
-![login.png](https://github.com/csr2/Coso.Abp/blob/master/images/login.png)
+![login.png](https://github.com/csr2/Coso.Abp/blob/master/images/logo.png)
 ![index1.png](https://github.com/csr2/Coso.Abp/blob/master/images/index1.png)
 ![index2.png](https://github.com/csr2/Coso.Abp/blob/master/images/index2.png)
 ![index3.png](https://github.com/csr2/Coso.Abp/blob/master/images/index3.png)
