@@ -1,5 +1,5 @@
 # Coso.Abp.Theme.AdminLTE
-abp framework mvc ui theme package,It uses bootstrap, so it is compatible with abp tag helper.
+ 东拼西凑得adminlte皮肤+一些abp基础功能
 
 ## Create a project using abp CLI
 
