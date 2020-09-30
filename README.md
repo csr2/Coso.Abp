@@ -9,4 +9,4 @@ abp framework mvc ui theme package,It uses bootstrap, so it is compatible with a
 
 * Install-Package Coso.Abp.Theme.AdminLTE
 
-* Open the module class of the .web project and change AbpAspNetCoreMvcUiBasicThemeModule to MyAbpThemeAdminLTEModule
+* Open the module class of the .web project and change AbpAspNetCoreMvcUiBasicThemeModule to CosoAbpThemeAdminLTEModule
