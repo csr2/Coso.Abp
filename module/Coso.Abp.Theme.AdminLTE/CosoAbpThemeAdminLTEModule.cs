@@ -13,6 +13,8 @@ using Coso.Abp.Theme.AdminLTE.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Validation.Localization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Volo.Abp.Account.Localization;
+using Volo.Abp.AspNetCore.Mvc.Localization;
 
 namespace Coso.Abp.Theme.AdminLTE
 {
@@ -24,6 +26,11 @@ namespace Coso.Abp.Theme.AdminLTE
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
+            context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
+            {
+                options.AddAssemblyResource(typeof(AdminLTEResource), typeof(CosoAbpThemeAdminLTEModule).Assembly);
+            });
+
             PreConfigure<IMvcBuilder>(mvcBuilder =>
             {
                 mvcBuilder.AddApplicationPartIfNotExists(typeof(CosoAbpThemeAdminLTEModule).Assembly);
@@ -51,6 +58,10 @@ namespace Coso.Abp.Theme.AdminLTE
                 options.Resources
                     .Add<AdminLTEResource>("en")
                     .AddVirtualJson("/Localization/AdminLTE");
+
+                options.Resources
+                 .Get<AccountResource>()
+                 .AddVirtualJson("/Localization/Core");
             });
 
             Configure<AbpToolbarOptions>(options =>
